@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズアプリ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+    <div id="title-screen" class="screen active">
+        <h1>クイズアプリ</h1>
+        <button id="start-button">START</button>
+    </div>
+
+    <div id="quiz-screen" class="screen">
+        <h2 id="question">問題文</h2>
+        <div id="choices" class="choices-container">
+            <button class="choice" data-choice="A">選択肢A</button>
+            <button class="choice" data-choice="B">選択肢B</button>
+            <button class="choice" data-choice="C">選択肢C</button>
+            <button class="choice" data-choice="D">選択肢D</button>
+        </div>
+        <div id="feedback" class="feedback-container">
+            <p id="result"></p>
+            <p id="explanation"></p>
+            <button id="next-button">次へ</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="screen">
+        <h2>リザルト</h2>
+        <p>あなたのスコア: <span id="score">0</span></p>
+        <h3>ランキング</h3>
+        <ol id="ranking-list"></ol>
+        <button id="retry-button">RETRY</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
